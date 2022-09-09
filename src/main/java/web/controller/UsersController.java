@@ -18,13 +18,13 @@ public class UsersController {
 
 
     @GetMapping
-    public String getAllUsers(Model model) {
+    public String getUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         return "users";
 
     }
     @GetMapping("/new")
-    public String addNewUser(Model model) {
+    public String addUser(Model model) {
         User user = new User();
         model.addAttribute("user", user);
         return "new";
