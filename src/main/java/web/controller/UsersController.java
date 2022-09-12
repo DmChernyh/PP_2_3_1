@@ -18,13 +18,13 @@ public class UsersController {
 
 
     @GetMapping
-    public String getUsers(Model model) {
+    public String getAllUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         return "users";
 
     }
     @GetMapping("/new")
-    public String addUser(Model model) {
+    public String createUser(Model model) {
         User user = new User();
         model.addAttribute("user", user);
         return "new";
@@ -38,7 +38,7 @@ public class UsersController {
     }
 
     @GetMapping("users/edit/{id}")
-    public String updateUser(@PathVariable("id") int id, Model model) {
+    public String getUserById(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "/edit";
     }
@@ -50,7 +50,7 @@ public class UsersController {
     }
 
     @GetMapping(value = "/deleteUser/{id}")
-    public String deleteUser(@PathVariable("id") int id) {
+    public String deleteUserById(@PathVariable("id") int id) {
         userService.deleteUserById(id);
         return "redirect:/";
     }
