@@ -16,45 +16,41 @@ public class UsersController {
         this.userService = userService;
     }
 
-
     @GetMapping
-    public String getAllUsers(Model model) {
+    public String getUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         return "users";
-
     }
+
     @GetMapping("/new")
-    public String createUser(Model model) {
+    public String addUser(Model model) {
         User user = new User();
         model.addAttribute("user", user);
         return "new";
     }
 
-    @GetMapping("/saveUser")
-    public String saveUser(@ModelAttribute("user") User user) {
+    @PostMapping("/saveUser")
+    public String add(@ModelAttribute("user") User user) {
         userService.saveUser(user);
-
         return "redirect:/";
     }
 
     @GetMapping("users/edit/{id}")
-    public String getUserById(@PathVariable("id") int id, Model model) {
+    public String updateUserById(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "/edit";
     }
 
-    @PostMapping("users/edit/{id}")
+    @PatchMapping("users/edit/{id}")
     public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") int id) {
         userService.updateUser(user);
         return "redirect:/";
     }
 
-    @GetMapping(value = "/deleteUser/{id}")
+    @DeleteMapping(value = "/deleteUser/{id}")
     public String deleteUserById(@PathVariable("id") int id) {
         userService.deleteUserById(id);
         return "redirect:/";
     }
-
-
 
 }

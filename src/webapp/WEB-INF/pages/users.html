@@ -21,7 +21,10 @@
         <td th:utext="${user.name}"></td>
         <td th:utext="${user.hobby}"></td>
         <td><button><a th:href="@{users/edit/{id}(id=${user.getId()})}">Edit</a></button></td>
-        <td><button><a th:href="@{/deleteUser/{id}(id=${user.getId()})}">Delete</a></button></td>
+        <td><form th:method="DELETE" th:action="@{deleteUser/{id}(id=${user.getId()})}" th:object="${user}">
+            <button type="submit">Delete</button>
+        </form></td>
+<!--        <td><button><a th:href="@{/deleteUser/{id}(id=${user.getId()})}">Delete</a></button></td>-->
     </tr>
     </tbody>
 </table>
